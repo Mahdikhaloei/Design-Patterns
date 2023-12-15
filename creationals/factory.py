@@ -46,14 +46,13 @@ class Postgres:
         
 
 class Sqlite:
-    def __init__(self, **kwargs):
-        self.db_file = kwargs.get("db_file", "/path/to/your/database.db")
-        self.backup_file = kwargs.get("backup_file", '/path/to/backup/backup.sql')
-    
-    def run_backup(self):
+    def run_backup(self, **kwargs):
+        db_file = kwargs.get("db_file", "/path/to/your/database.db")
+        backup_file = kwargs.get("backup_file", './backup/backup.sql')
+        
         try:
-            shutil.copy2(self.db_file, self.backup_file)
-            print(f"SQLite backup successfully created at {self.backup_file}")
+            shutil.copy2(db_file, backup_file)
+            print(f"SQLite backup successfully created at {backup_file}")
         except Exception as e:
             print(f"SQLite backup failed: {e}")
 
